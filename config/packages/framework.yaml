@@ -17,6 +17,13 @@ framework:
     php_errors:
         log: true
 
+    property_info:
+        enabled: true
+
+    validation:
+        enabled: true
+
+
 when@test:
     framework:
         test: true

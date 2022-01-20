@@ -3,7 +3,6 @@
 {% block body %}
 
     <h1>This is home page</h1>
-    <p>Blog text: {{ blog_text ?? ''}}</p>
     <form action="{{ path('dashboard.home') }}" method="post">
         <p>
             <label>Название: </label><br>
@@ -15,4 +14,9 @@
         </p>
         <button>Отправить</button>
     </form>
+    {% for post in posts %}
+        <hr>
+        <p><b>Название: </b>{{ post.title|upper|raw }}</p>
+        <p><b>Текст: </b>{{ post.text|raw }}</p>
+    {% endfor %}
 {% endblock %}
