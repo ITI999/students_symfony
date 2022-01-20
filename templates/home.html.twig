@@ -5,7 +5,14 @@
     <h1>This is home page</h1>
     <p>Blog text: {{ blog_text ?? ''}}</p>
     <form action="{{ path('dashboard.home') }}" method="post">
-        <input type="text" name="text">
+        <p>
+            <label>Название: </label><br>
+            <input type="text" name="title">
+        </p>
+        <p>
+            <label>Текст: </label><br>
+            <input type="text" name="text">
+        </p>
         <button>Отправить</button>
     </form>
 {% endblock %}
