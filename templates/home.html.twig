@@ -1,0 +1,11 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+
+    <h1>This is home page</h1>
+    <p>Blog text: {{ blog_text ?? ''}}</p>
+    <form action="{{ path('dashboard.home') }}" method="post">
+        <input type="text" name="text">
+        <button>Отправить</button>
+    </form>
+{% endblock %}
