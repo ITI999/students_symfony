@@ -1,0 +1,22 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}{{ subject.title }}{% endblock %}
+
+{% block body %}
+<h1>{{ subject.title }}</h1>
+    <h3>Студенты и их оценки</h3>
+    <table class="table">
+        <thead>
+            <th>ФИО</th>
+            <th>Оценка</th>
+        </thead>
+        {% dump subject.marks %}
+        {% for mark in subject.marks %}
+            <tr>
+                <td><a class="nav-link" href="{{ path("user.show", {user: mark.user.id}) }}">{{ mark.user.name }}</a></td>
+                <td>{{ mark.mark }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{#    {{ $users->links() }}#}
+{% endblock %}

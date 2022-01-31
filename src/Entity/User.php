@@ -6,8 +6,11 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity('email')]
 class User
 {
     #[ORM\Id]
@@ -21,10 +24,11 @@ class User
     #[ORM\Column(type: 'date')]
     private $birthday;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'json', nullable: true)]
     private $address;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(name: 'email', type: 'string', length: 255, unique: true)]
+    #[Assert\Email]
     private $email;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -77,17 +81,6 @@ class User
         return $this;
     }
 
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
 
     public function getEmail(): ?string
     {
@@ -177,5 +170,39 @@ class User
         }
 
         return $this;
+    }
+
+    public function getAddress(): ?array
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?array $address): self
+    {
+        $address['city'] = $this->mb_ucfirts($address['city']);
+        $address['street'] = $this->mb_ucfirts($address['street']);
+
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getFullAddress()
+    {
+        $address = $this->getAddress();
+
+        return $address
+            ? $address['city'] . ', ' . $address['street'] . ', ' . $address['house']
+            : '';
+    }
+
+
+    private function mb_ucfirts($str, $charset = '')
+    {
+        if($charset == '') $charset = mb_internal_encoding();
+        $letter = mb_strtoupper(mb_substr($str, 0, 1, $charset), $charset);
+        $suffix = mb_substr($str, 1, mb_strlen($str, $charset) - 1, $charset);
+
+        return $letter.$suffix;
     }
 }

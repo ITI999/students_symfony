@@ -1,0 +1,16 @@
+{#@extends('layouts.app')#}
+
+{#@section('title','Edit group')#}
+
+{#@section('content')#}
+{#    @include('marks.form', ['action' => route('usersubjects.update', $usersubject->complexId()), 'method' => 'PUT'])#}
+{#@endsection#}
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Edit mark{% endblock %}
+
+{% block body %}
+
+    {% include('mark/form.html.twig') %}
+
+{% endblock %}

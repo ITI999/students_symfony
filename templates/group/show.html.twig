@@ -1,0 +1,37 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}{{ group.title }}{% endblock %}
+
+{% block body %}
+    <h1>Группа: {{ group.title }}</h1>
+    <p><a class="btn btn-primary" href="{# route("groups.users.index", $group->id) #}">Студенты группы</a></p>
+    <div class="container my-3">
+        <a class="d-inline nav-link h4 {#  Route::currentRouteName() == 'groups.show' ? 'disabled' : '' #}" href="{# route('groups.show', $group->id) #}">Журнал</a>
+        <a class="d-inline nav-link h4 {# Route::currentRouteName() == 'groups.best' ? 'disabled' : '' #}" href="{# route('groups.best', $group->id) #}">Отличники</a>
+        <a class="d-inline nav-link h4 {# Route::currentRouteName() == 'groups.good' ? 'disabled' : '' #}" href="{# route('groups.good', $group->id) #}">Хорошисты</a>
+    </div>
+    <h2>{# $message #}</h2>
+    <table class="table">
+        <thead>
+        <th>Студент</th>
+{#        {% for subject in subjects %}#}
+{#            <th class="text-center">{{  subject.title }}</th>#}
+{#        {% endfor %}#}
+        </thead>
+        {% for student in group.users %}
+            <tr>
+                <td class="{# $user->color #}">{{ student.name }}</td>
+{#                @foreach($user->getMarks($subjects) as $mark)#}
+                    <td class="text-center">{# $mark #}</td>
+{#                @endforeach#}
+            </tr>
+        {% endfor %}
+{#        <tfoot>#}
+{#            <td class="font-weight-bold">Средние значения</td>#}
+{#            @foreach($group->getAvgGroupMarks($subjects) as $avgMark)#}
+{#                <td class="text-center">#}{# $avgMark #}{#</td>#}
+{#            @endforeach#}
+{#        </tfoot>#}
+    </table>
+    {# $users->links() #}
+{% endblock %}

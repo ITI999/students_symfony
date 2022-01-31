@@ -1,0 +1,17 @@
+{#@extends('layouts/app')#}
+
+{#@section('title','Create subject')#}
+
+{#@section('content')#}
+{#    @include('subjects/form', ['action' => route('subjects.store'), 'method' => 'POST'])#}
+{#@endsection#}
+
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Create subject{% endblock %}
+
+{% block body %}
+
+    {% include('subject/form.html.twig') %}
+
+{% endblock %}

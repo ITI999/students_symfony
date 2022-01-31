@@ -1,0 +1,37 @@
+{{ form_start(form) }}
+    <h2>ФИО: {{ user.name }}</h2>
+    <div class="row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+            <div class="form-label">{{ form_label(form.subject) }}</div>
+        </div>
+        <div class="col-sm-5">
+            {{ form_widget(form.subject, {'attr' : {'class': "form-control form-control-lg"}}) }}
+        </div>
+    </div>
+    {% if not form.subject.vars.valid %}
+        <div class="row">
+            <div class="alert alert-danger col-md-8">
+                {{ form_errors(form.subject) }}
+            </div>
+        </div>
+    {% endif %}
+    <div class="row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+            <label class="form-label">{{ form_label(form.mark) }}</label>
+        </div>
+        <div class="col-sm-5">
+            {{ form_widget(form.mark, {'attr' : {'class': "form-control form-control-lg"}}) }}
+        </div>
+    </div>
+    {% if not form.mark.vars.valid %}
+        <div class="row">
+            <div class="alert alert-danger col-md-8">
+                {{ form_errors(form.mark) }}
+            </div>
+        </div>
+    {% endif %}
+    <div class="row mb-3 g-3 ">
+        {{ form_widget(form.save, {'attr' : {'class': "btn btn-success btn-lg col-md-2 offset-md-6"}}) }}
+    </div>
+{{ form_end(form) }}
+

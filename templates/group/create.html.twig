@@ -1,0 +1,15 @@
+{#@extends('layouts/app')#}
+
+{#@section('title','Create group')#}
+
+{#@section('content')#}
+{#    @include('groups/form', ['action' => route('groups.store'), 'method' => 'POST'])#}
+{#@endsection#}
+
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Create group{% endblock %}
+
+{% block body %}
+    {% include('group/form.html.twig') %}
+{% endblock %}

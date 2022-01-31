@@ -1,0 +1,57 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Groups{% endblock %}
+
+{% block body %}
+    <h1>Список групп</h1>
+    <p><a class="btn btn-success" href="{{ path('group.create') }}">Добавить группу</a></p>
+
+    <div class="container ">
+        <form class="form-group d-flex justify-content-end">
+            <div class="p-2">
+                <label for="title" class="col-form-label">Название: </label>
+            </div>
+            <div class="p-2">
+                <input class="form-control" id="title" name="title"
+                       value="{# request()->get('title') #}">
+            </div>
+            <div class="p-2">
+                <input class="btn btn-primary " type="submit" value="Применить">
+            </div>
+        </form>
+    </div>
+
+    <table class="table">
+        <thead>
+            <th>Название группы</th>
+            <th>Студенты группы</th>
+            <th>Действия</th>
+        </thead>
+
+        {% if groups is defined %}
+            {% for group in groups %}
+                <tr>
+                    <td><a class="nav-link" href="{{ path('group.show', {group: group.id}) }}">{{ group.title }}</a></td>
+                    <td><a class="btn btn-primary" href="  {{ path('user.index', {group: group.id}) }} ">Студенты</a></td>
+                    <td>
+                        <div class="d-inline mx-3">
+                            <a class="btn btn-primary" href="{{ path('group.edit', {group: group.id}) }}">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </div>
+                        <form class="d-inline" action="{{ path('group.delete', {group: group.id}) }}" method="POST">
+                            <input type="hidden" name="token" value="{{ csrf_token('delete-group') }}"/>
+                            <input type="hidden" name="_method" value="DELETE"/>
+
+                            <button class="btn btn-danger" type="submit">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+    {# $groups->appends(request()->all())->links() #}
+
+{% endblock %}

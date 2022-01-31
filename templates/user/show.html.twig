@@ -1,0 +1,54 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Show user{% endblock %}
+
+{% block body %}
+    <div class="row g-3">
+        <h1 class="col-auto">ФИО: {{ user.name }}</h1>
+        <div class="col-auto mt-4"><a class="btn btn-success" href="{{ path('mark.create', {user: user.id}) }}">Добавить оценку</a></div>
+        <div class="col-auto mt-4"><a class="btn btn-primary" href="{{ path("user.edit", {user: user.id}) }}">Редактировать</a></div>
+        <div class="col-auto mt-4">
+            <form action="{{ path("user.delete",{user: user.id}) }}" method="POST">
+                <input type="hidden" name="token" value="{{ csrf_token('delete-user') }}"/>
+                <input type="hidden" name="_method" value="DELETE"/>
+                <input class="btn btn-danger" type="submit" value="Удалить">
+            </form>
+        </div>
+    </div>
+
+{#    <p>Аватар: {{ user.avatar }}</p>#}
+{#    <p><img src="{{ $user->getAvatar(300, 300) ?? ''}}"/></p>#}
+    <p>Email: {{ user.email }}</p>
+    <p>Роль: {{ user.role}}</p>
+    <p>День рождения: {{ user.birthday|format_date(locale='ru') }}</p>
+    <p>Адрес: {{ user.fullAddress }}</p>
+    <p>Группа: {{ user.studyGroup.title}}</p>
+
+    <table class="table">
+        <thead>
+            <th>Предмет</th>
+            <th>Оценка</th>
+            <th>Действия</th>
+        </thead>
+        {% for mark in user.marks %}
+            <tr>
+                <td>{{ mark.subject.title }}</td>
+                <td>{{ mark.mark }}</td>
+                <td>
+                    <div class="d-inline mx-3">
+                        <a class="btn btn-primary" href="{{ path('mark.edit', {mark: mark.id}) }}">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                    </div>
+                    <form class="d-inline" action="{{ path('mark.delete', {mark: mark.id}) }}" method="POST">
+                        <input type="hidden" name="token" value="{{ csrf_token('delete-mark') }}"/>
+                        <input type="hidden" name="_method" value="DELETE"/>
+                        <button class="btn btn-danger" type="submit">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,204 @@
+{#<form action='{{ $action }}' method='POST' enctype="multipart/form-data">#}
+
+{{ form_start(form) }}
+
+
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+            <div class="col-sm-2 col-form-label col-form-label-lg">{{ form_label(form.name) }}</div>
+        </div>
+        <div class="col-sm-5">
+            {{ form_widget(form.name, {'attr': {'class': 'form-control form-control-lg'}}) }}
+        </div>
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+        </div>
+        {% if not form.name.vars.valid %}
+            <div class="col-sm-5 alert alert-danger  ">
+                {{ form_errors(form.name) }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+            <div class="col-sm-2 col-form-label col-form-label-lg">{{ form_label(form.email) }}</div>
+        </div>
+        <div class="col-sm-5">
+            {{ form_widget(form.email, {'attr': {'class': 'form-control form-control-lg'}}) }}
+        </div>
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+        </div>
+        {% if not form.email.vars.valid %}
+            <div class="col-sm-5 alert alert-danger  ">
+                {{ form_errors(form.email) }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+            <div class="col-sm-2 col-form-label col-form-label-lg">{{ form_label(form.birthday) }}</div>
+        </div>
+        <div class="col-sm-5">
+            {{ form_widget(form.birthday, {'attr': {'class': 'form-control form-control-lg'}}) }}
+        </div>
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+        </div>
+        {% if not form.birthday.vars.valid %}
+            <div class="col-sm-5 alert alert-danger  ">
+                {{ form_errors(form.birthday) }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+            <div class="col-sm-2 col-form-label col-form-label-lg">{{ form_label(form.role) }}</div>
+        </div>
+        <div class="col-sm-5">
+            {{ form_widget(form.role, {'attr': {'class': 'form-control form-control-lg'}}) }}
+{#            <select class="form-control form-control-lg" id="role" name="role">#}
+{#                @foreach($roles as $key => $value)#}
+{#                    <option value="{{ $key }}" {{ (old('role') ?? $user->role ?? 0) == $key ? 'selected' : '' }}>#}
+{#                        {{ $value }}#}
+{#                    </option>#}
+{#                @endforeach#}
+{#            </select>#}
+        </div>
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+        </div>
+        {% if not form.role.vars.valid %}
+            <div class="col-sm-5 alert alert-danger  ">
+                {{ form_errors(form.role) }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+            <div class="col-sm-2 col-form-label col-form-label-lg">{{ form_label(form.password.first) }}</div>
+        </div>
+        <div class="col-sm-5">
+            {{ form_widget(form.password.first, {'attr': {'class': 'form-control form-control-lg'}}) }}
+        </div>
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+        </div>
+        {% if not form.password.first.vars.valid %}
+            <div class="col-sm-5 alert alert-danger  ">
+                {{ form_errors(form.password.first) }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+            <div class="col-sm-2 col-form-label col-form-label-lg">{{ form_label(form.password.second) }}</div>
+        </div>
+        <div class="col-sm-5">
+            {{ form_widget(form.password.second, {'attr': {'class': 'form-control form-control-lg'}}) }}
+        </div>
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+        </div>
+        {% if not form.password.second.vars.valid %}
+            <div class="col-sm-5 alert alert-danger  ">
+                {{ form_errors(form.password.second) }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+            <div class="col-sm-2 col-form-label col-form-label-lg">{{ form_label(form.studyGroup) }}</div>
+        </div>
+        <div class="col-sm-5">
+            {{ form_widget(form.studyGroup, {'attr': {'class': 'form-control form-control-lg'}}) }}
+        </div>
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+        </div>
+        {% if not form.studyGroup.vars.valid %}
+            <div class="col-sm-5 alert alert-danger  ">
+                {{ form_errors(form.studyGroup) }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+            <div class="col-sm-2 col-form-label col-form-label-lg">{{ form_label(form.address.city) }}</div>
+        </div>
+        <div class="col-sm-5">
+            {{ form_widget(form.address.city, {'attr': {'class': 'form-control form-control-lg'}}) }}
+        </div>
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+        </div>
+        {% if not form.address.city.vars.valid %}
+            <div class="col-sm-5 alert alert-danger  ">
+                {{ form_errors(form.address.city) }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+            <div class="col-sm-2 col-form-label col-form-label-lg">{{ form_label(form.address.street) }}</div>
+        </div>
+        <div class="col-sm-5">
+            {{ form_widget(form.address.street, {'attr': {'class': 'form-control form-control-lg'}}) }}
+        </div>
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+        </div>
+        {% if not form.address.street.vars.valid %}
+            <div class="col-sm-5 alert alert-danger  ">
+                {{ form_errors(form.address.street) }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+            <div class="col-sm-2 col-form-label col-form-label-lg">{{ form_label(form.address.house) }}</div>
+        </div>
+        <div class="col-sm-5">
+            {{ form_widget(form.address.house, {'attr': {'class': 'form-control form-control-lg'}}) }}
+        </div>
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+        </div>
+        {% if not form.address.house.vars.valid %}
+            <div class="col-sm-5 alert alert-danger  ">
+                {{ form_errors(form.address.house) }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+            <div class="col-sm-2 col-form-label col-form-label-lg">{{ form_label(form.avatar) }}</div>
+        </div>
+        <div class="col-sm-5">
+            {{ form_widget(form.avatar, {'attr': {'class': 'form-control form-control-lg'}}) }}
+        </div>
+    </div>
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+        </div>
+        {% if not form.avatar.vars.valid %}
+            <div class="col-sm-5 alert alert-danger  ">
+                {{ form_errors(form.avatar) }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="row mb-3 g-3 ">
+        {{ form_widget(form.save, {'attr': {'class': 'btn btn-success btn-lg col-md-2 offset-md-6'}}) }}
+    </div>
+
+{{ form_end(form) }}

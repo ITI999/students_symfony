@@ -10,6 +10,6 @@ home_page:
     path: /
     controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
     defaults:
-        route: 'dashboard.home'
+        route: 'group.index'
         keepQueryParams: true
         keepRequestMethod: true

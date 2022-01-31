@@ -1,0 +1,54 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Subjects{% endblock %}
+
+{% block body %}
+
+    <h1>Список предметов</h1>
+    <p><a class="btn btn-success" href="{{ path('subject.create') }}">Создать</a></p>
+
+    <div class="container ">
+        <form class="form-group d-flex justify-content-end">
+            <div class="p-2">
+                <label for="title" class="col-form-label">Название: </label>
+            </div>
+            <div class="p-2">
+                <input class="form-control" id="title" name="title"
+                       value="#">
+            </div>
+            <div class="p-2">
+                <input class="btn btn-primary " type="submit" value="Применить">
+            </div>
+        </form>
+    </div>
+
+    <table class="table">
+        <thead>
+            <th>Название предмета</th>
+            <th>Действия</th>
+        </thead>
+        {% if subjects is defined %}
+            {% for subject in subjects %}
+                <tr>
+                    <td><a class="nav-link" href="{{ path('subject.show', {subject: subject.id}) }}">{{ subject.title }}</a></td>
+                    <td>
+                        <div class="d-inline mx-3">
+                            <a class="btn btn-primary" href="{{ path('subject.edit', {subject: subject.id}) }}">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </div>
+                        <form class="d-inline" action="{{ path('subject.delete', {subject: subject.id}) }}" method="POST">
+                            <input type="hidden" name="token" value="{{ csrf_token('delete-subject') }}"/>
+                            <input type="hidden" name="_method" value="DELETE"/>
+
+                            <button class="btn btn-danger" type="submit">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+
+{% endblock %}

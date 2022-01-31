@@ -1,0 +1,16 @@
+{#@extends('layouts.app')#}
+
+{#@section('title','Create group')#}
+
+{#@section('content')#}
+{#    @include('marks.form', ['action' => route('users.usersubjects.store', $user->id), 'method' => 'POST'])#}
+{#@endsection#}
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Create mark{% endblock %}
+
+{% block body %}
+
+    {% include('mark/form.html.twig') %}
+
+{% endblock %}

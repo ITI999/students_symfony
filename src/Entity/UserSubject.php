@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\UserSubjectRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserSubjectRepository::class)]
+#[UniqueEntity(fields: ['subject', 'user'], message: 'Student already has mark for this subject.')]
 class UserSubject
 {
     #[ORM\Id]
@@ -22,6 +25,11 @@ class UserSubject
     private $user;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\Range(
+        notInRangeMessage: "Marks should be between 2 and 5.",
+        min: 2,
+        max: 5
+    )]
     private $mark;
 
     public function getId(): ?int

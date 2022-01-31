@@ -1,0 +1,63 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+    <h1>Группа: {{ group.title }}</h1>
+    <p><a class="btn btn-success" href="{{ path('user.create', {group: group.id}) }}">Добавить студента</a></p>
+
+{#    <div class="container ">#}
+{#        <form class="form-group d-flex justify-content-end">#}
+{#            <div class="p-2">#}
+{#                <label for="name" class="col-form-label">ФИО: </label>#}
+{#            </div>#}
+{#            <div class="p-2">#}
+{#                <input class="form-control" id="name" name="name"#}
+{#                       value="{{ request()->get('name') }}">#}
+{#            </div>#}
+{#            <div class="p-2">#}
+{#                <label for="birthday" class="col-form-label">Дата рождения: </label>#}
+{#            </div>#}
+{#            <div class="p-2">#}
+{#                <input class="form-control" id="birthday" name="birthday"#}
+{#                       value="{{ request()->get('birthday') }}">#}
+{#            </div>#}
+{#            <div class="p-2">#}
+{#                <input class="btn btn-primary " type="submit" value="Применить">#}
+{#            </div>#}
+{#        </form>#}
+{#    </div>#}
+
+    <table class="table">
+        <thead>
+            <th class="px-5">ФИО</th>
+            <th>Роль</th>
+            <th>Дата рождения</th>
+            <th>Действия</th>
+        </thead>
+        {% if users is defined %}
+            {% for user in users %}
+                <tr {# class="{{$user->trashed() ? 'table-danger' : ''}}"#}>
+                    <td><a class="nav-link" href="{{ path('user.show', {user: user.id}) }}">{{ user.name }}</a></td>
+                    <td>{{ user.role }}</td>
+                    <td>{{ user.birthday|format_date(locale='ru') }}</td>
+                    <td>
+                        <div class="d-inline">
+                            <a class="btn btn-primary" href="{{ path('user.edit', {user: user.id}) }}">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </div>
+                        <form class="d-inline" action="{{ path('user.delete', {user: user.id}) }}" method="POST">
+                            <input type="hidden" name="token" value="{{ csrf_token('delete-user') }}"/>
+                            <input type="hidden" name="_method" value="DELETE"/>
+                            <button class="btn btn-danger" type="submit">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+
+{% endblock %}

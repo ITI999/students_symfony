@@ -1,0 +1,22 @@
+{{ form_start(form) }}
+
+    <div class="form-group row mb-3 g-3 align-items-center">
+        <div class="col-sm-3">
+            <div class="col-sm-2 col-form-label col-form-label-lg">{{ form_label(form.title) }} </div>
+        </div>
+        <div class="col-sm-5">
+            {{ form_widget(form.title, {'attr': {'class': 'form-control form-control-lg'}}) }}
+        </div>
+    </div>
+    <div class="row mb-3 g-3 ">
+        {{ form_widget(form.save, {'attr': {'class': 'btn btn-success btn-lg col-md-2 offset-md-6 '}}) }}
+    </div>
+    {% if not form.title.vars.valid %}
+        <div class="row">
+            <div class="alert alert-danger col-md-8">
+                {{ form_errors(form.title) }}
+            </div>
+        </div>
+    {% endif %}
+{{ form_end(form) }}
+

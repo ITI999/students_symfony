@@ -1,0 +1,17 @@
+{#@extends('layouts/app')#}
+
+{#@section('title','Edit group')#}
+
+{#@section('content')#}
+{#    @include('groups/form', ['action' => route('groups.update', $group->id), 'method' => 'PUT'])#}
+{#@endsection#}
+
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Edit group{% endblock %}
+
+{% block body %}
+
+    {% include('group/form.html.twig') %}
+
+{% endblock %}

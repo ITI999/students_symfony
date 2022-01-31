@@ -1,0 +1,16 @@
+{#@extends('layouts/app')#}
+
+{#@section('title','Edit subject')#}
+
+{#@section('content')#}
+{#    @include('subjects/form', ['action' => route('subjects.update', $subject->id), 'method' => 'PUT'])#}
+{#@endsection#}
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Edit subject{% endblock %}
+
+{% block body %}
+
+    {% include('subject/form.html.twig') %}
+
+{% endblock %}
